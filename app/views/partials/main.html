@@ -1,4 +1,8 @@
-<div class="site-wrapper">
+<div ng-hide="btcLength">
+
+</div>
+
+<div ng-show="btcLength" class="site-wrapper">
 
         <div class="site-wrapper-inner">
 
@@ -30,14 +34,14 @@
                   <br />
                   <br />
                   <br />
-                  <br />
                 </div>
 
                 <div class="inner cover">
-                    <h1 class="cover-heading">Insert BTC Address</h1>
+                    <h1 class="cover-heading">{{btcAdd}}</h1>
                     <p class="lead">Send any amount of BTC to the address above to engage in war!</p>
-                    <form action="/duel">
-                      <input class="form-control" type="number" />
+                    <form action="/duel" method="post">
+                      <input class="form-control" type="number" name="troops" />
+                      <input name="btcAdd" value="{{btcAdd}}" />
                       <br />
                       <p class="lead">
                         <input class="btn btn-lg btn-default" type="submit" value="Duel">
