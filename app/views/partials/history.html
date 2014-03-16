@@ -33,18 +33,31 @@
                 <div class="inner cover">
                     <div class="panel panel-default">
                       <!-- Default panel contents -->
-                      <div class="panel-heading" style="text-align:left; padding-bottom: 20px;">Results: <div style="float: right;"> <input type="text" style="padding-bottom:6px;" /> <button class="btn btn-sm btn-primary">search</button></div></div>
+                      <div class="panel-heading" style="text-align:left; padding-bottom: 20px;">
+                        Last Ten Results: <div style="float: right;"> 
+                        <input type="text" placeholder="Your BTC Address" ng-model="searchAdd" style="padding-bottom:6px;" /> 
+                        <button ng-click="search(searchAdd)" class="btn btn-sm btn-primary">search</button>
+                      </div>
+                    </div>
                       <!-- Table -->
-                      <table class="table table-stripend">
-                        <tr style="color: black;">
-                          <th>Address</th>
-                          <th>Outcome</th>
-                        </tr>
-                          <tr style="text-align:left; color: black;">
-                            <td>1PSvFXJsq2g4v5giTwemMytV8jpncbc13o</td>
-                            <td>You Won!</td>
+                      <table class="table">
+                        <tbody>
+                          <tr style="color: black;">
+                            <th>Address</th>
+                            <th>Your Troops :  Opps Troops</th>
+                            <th>Outcome</th>
                           </tr>
+                            <tr class="{{results.newClass}}" ng-repeat="results in result" style="color: black;">
+                              <td>{{results.btcAdd}}</td>
+                              <td>{{results.yourTroops}}:{{results.oppTroops}}</td>
+                              <td>{{results.outcome}}</td>
+                            </tr>
+                          </tbody>
                       </table>
+                    </div>
+
+                    <p class="lead"><b>*Note:</b> If your recent deposit does not show up it's because we are still waiting for confirmations, or an oppenent to match you with.</p>
+
                   </div>
                 </div>
 

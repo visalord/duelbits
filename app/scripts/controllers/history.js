@@ -15,11 +15,38 @@ angular.module('duelbitsApp')
 		url: '/results/recent'
 	}).success(function(data) {
 		console.log('Recent matches recieved!');
-		$scope.results = data;
-		console.log(data);
-
+		for (var i = 0; i < data.length; i++){
+			data[i].yourTroops = Math.round((data[i].yourTroops * 0.9) * 1000) / 1000;
+			data[i].oppTroops = Math.round((data[i].oppTroops * 0.9) * 1000) / 1000;
+			if (data[i].outcome === 'You Won!'){
+				data[i].newClass = 'success';
+			}else{
+				data[i].newClass = 'danger';
+			}
+		}
+		$scope.result = data;
 	}).error(function() {
 		console.log('could not get recent matches');
 	});
 
+	$scope.search = function(btcAdd){
+		$http({
+			method: 'GET',
+			url: '/results/' + btcAdd
+		}).success(function(data) {
+			console.log('Recent matches recieved!');
+			for (var i = 0; i < data.length; i++){
+				data[i].yourTroops = Math.round((data[i].yourTroops * 0.9) * 1000) / 1000;
+				data[i].oppTroops = Math.round((data[i].oppTroops * 0.9) * 1000) / 1000;
+				if (data[i].outcome === 'You Won!'){
+					data[i].newClass = 'success';
+				}else{
+					data[i].newClass = 'danger';
+				}
+			}
+			$scope.result = data;
+		}).error(function() {
+			console.log('could not get recent matches');
+		});
+	};
 });
