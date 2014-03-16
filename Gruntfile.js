@@ -16,6 +16,7 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   // Define the configuration for all the tasks
+
   grunt.initConfig({
 
     // Project settings
@@ -512,4 +513,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('heroku:production', 'clean less mincss uglify');
 };
