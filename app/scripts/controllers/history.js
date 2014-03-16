@@ -2,6 +2,9 @@
 
 angular.module('duelbitsApp')
   .controller('HistoryCtrl', function ($scope, $window, $http) {
+	$http.get('/api/awesomeThings').success(function(awesomeThings) {
+		$scope.awesomeThings = awesomeThings;
+	});
 	if ($window.document.width < 700) {
 		console.log('isMobile');
 		$scope.isMobile = true;
