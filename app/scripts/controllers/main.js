@@ -1,39 +1,83 @@
 'use strict';
 
 angular.module('duelbitsApp')
-  .controller('MainCtrl', [ '$scope', '$window', '$modal', '$log', '$http', function ($scope, $window, $modal, $log, $http) {
+  .controller('MainCtrl', [ '$scope', '$window', '$modal', '$log', '$http', '$cookies', function ($scope, $window, $modal, $log, $http, $cookies) {
     
     $scope.btcLength = false;
+    $scope.isLoading = true;
+    $scope.btcAdd = $cookies.btcAdd;
+	
+		if ($window.document.width < 700) {
+			console.log('isMobile');
+			$scope.isMobile = true;
+		}else {
+			console.log('isNotMobile');
+			$scope.isMobile = false;
+		}
 
-		$scope.isMobile = function(){
-			if ($window.document.width < 700) {
-				return true;
-			}else {
-				return false;
-			}
-		};
+		if ($scope.btcAdd === undefined){
 
-		var modalInstance = $modal.open({
-			templateUrl: '/partials/myModalContent.html',
-			backdrop: false
-		});
-
-		modalInstance.result.then(function (btcAdd) {
-			console.log(btcAdd);
-			$scope.btcAdd = btcAdd;
-			$scope.btcLength = true;
-			var callbackUrl = encodeURIComponent('http://duelbits.herokuapp.com/paid?btcAdd='+btcAdd+'&secret=7UMi8lTZv1OmtT');
-			$http({
-				method: 'POST',
-				url: 'https://blockchain.info/api/receive?method=create&address=18j3TfeSf4MLQsukw7kHiFKj3xhTqfrAD9&callback=' + callbackUrl
-			}).success(function(data) {
-				console.log('deposit address created');
-				console.log(data);
-			}).error(function() {
-				console.log('could not create deposit address');
+			var modalInstance = $modal.open({
+				templateUrl: '/partials/myModalContent.html',
+				backdrop: false
 			});
-		}, function () {
-			$log.info('Modal dismissed at: ' + new Date());
-		});
+
+			modalInstance.result.then(function (btcAdd) {
+				$cookies.btcAdd = btcAdd;
+				$scope.btcAdd = $cookies.btcAdd;
+				$scope.btcLength = true;
+
+				$http({
+					method: 'POST',
+					url: '/pay/' + btcAdd
+				}).success(function(data) {
+					console.log('deposit address created');
+					$scope.isLoading = false;
+					$cookies.depAdd = data;
+					$scope.depAdd = $cookies.depAdd;
+				}).error(function() {
+					console.log('could not create deposit address');
+				});
+			}, function () {
+				$log.info('Modal dismissed at: ' + new Date());
+			});
+		} else{
+			$scope.btcLength = true;
+			$scope.isLoading = false;
+			$scope.depAdd = $cookies.depAdd;
+		}
+
+		$scope.updateAdd = function() {
+
+			$scope.btcLength = false;
+			$scope.isLoading = true;
+
+			var modalInstance = $modal.open({
+				templateUrl: '/partials/myModalContent.html',
+				backdrop: false
+			});
+
+			modalInstance.result.then(function (btcAdd) {
+				$cookies.btcAdd = btcAdd;
+				$scope.btcAdd = $cookies.btcAdd;
+				$scope.btcLength = true;
+
+				$http({
+					method: 'POST',
+					url: '/pay/' + btcAdd
+				}).success(function(data) {
+					console.log('deposit address created');
+					console.log(data);
+					$scope.isLoading = false;
+					$cookies.depAdd = data;
+					$scope.depAdd = $cookies.depAdd;
+				}).error(function() {
+					console.log('could not create deposit address');
+				});
+			}, function () {
+				$log.info('Modal dismissed at: ' + new Date());
+			});
+
+		};
 
 	}]);

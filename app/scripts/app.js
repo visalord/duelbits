@@ -13,6 +13,14 @@ angular.module('duelbitsApp', [
         templateUrl: 'partials/main',
         controller: 'MainCtrl'
       })
+      .when('/about', {
+        templateUrl: 'partials/about',
+        controller: 'AboutCtrl'
+      })
+      .when('/history', {
+        templateUrl: 'partials/history',
+        controller: 'HistoryCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

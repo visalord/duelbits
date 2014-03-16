@@ -1,10 +1,4 @@
-<div ng-hide="btcLength">
-
-</div>
-
-<div ng-show="btcLength" class="site-wrapper">
-
-        <div class="site-wrapper-inner">
+<div class="site-wrapper-inner">
 
             <div class="cover-container">
 
@@ -12,9 +6,9 @@
                     <div class="inner">
                         <h3 class="masthead-brand">DuelBits</h3>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="/">Home</a>
+                            <li ><a href="/">Home</a>
                             </li>
-                            <li><a href="/about">About</a>
+                            <li class="active"><a href="/about">About</a>
                             </li>
                             <li><a href="/history">History</a>
                             </li>
@@ -37,12 +31,8 @@
                 </div>
 
                 <div class="inner cover">
-                    <h1 ng-show="isLoading">Loading...</h1>
-                    <h2 ng-hide="isMobile || isLoading" class="cover-heading">{{depAdd}}</h2>
-                    <h4 ng-show="isMobile">{{depAdd}}</h2>
-                    <p ng-hide="isMobile"class="lead">Send BTC to the Address above to Engage In War! <br/> Minimum Bet: 0.001 BTC</p>
-                    <p ng-show="isMobile">Send BTC to the Address above to Engage In War! <br/> Minimum Bet: 0.001 BTC</p>
-                    <button class="btn" ng-click="updateAdd()"><b>Change Withdrawl Address</b></button>
+                    <h2 class="cover-heading">A Game For The Wealthy:</h2>
+                    <p class="lead">DuelBits is a game of blind war! Just like in life, the rich get richer here! In this game every 0.001BTC is considered a troop, and anything less is resource! If you send more BTC than the player before you then you win! Winners will get their btc back, aswell as their oppenents! Ties will be settled by whoever sent the most resources! (aka all btc less 0.001BTC) You can check the results of past wars in the history tab. (past battles will remain in history for 48 hours)</p>
                 </div>
 
                 <div class="mastfoot">
@@ -55,5 +45,3 @@
             </div>
 
         </div>
-
-    </div>

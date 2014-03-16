@@ -5,7 +5,9 @@
     "express": "~3.4.3",
     "lodash": "~2.4.1",
     "mongoose": "~3.8.8",
-    "ejs": "~0.8.4"
+    "ejs": "~0.8.4",
+    "request": "^2.34.0",
+    "mywallet": "^0.1.6"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -60,7 +62,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test",
-    "start": "grunt serve"
+    "test": "grunt test"
   }
 }
